@@ -1,21 +1,21 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    alias(adamglin.plugins.android.applcation)
-    alias(adamglin.plugins.compose.compiler)
-    alias(adamglin.plugins.kotlin.android)
+    alias(libs.plugins.android.applcation)
+    alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.kotlin.android)
 }
 
 android {
     namespace = "com.adamglin.composeshadow.android"
-    compileSdk = adamglin.versions.androidCompileSdk.get().toInt()
+    compileSdk = libs.versions.androidCompileSdk.get().toInt()
     buildFeatures {
         buildConfig = false
         compose = true
     }
     defaultConfig {
-        minSdk = adamglin.versions.androidMinSdk.get().toInt()
-        lint.targetSdk = adamglin.versions.androidTargetSdk.get().toInt()
+        minSdk = libs.versions.androidMinSdk.get().toInt()
+        lint.targetSdk = libs.versions.androidTargetSdk.get().toInt()
         applicationId = "com.adamglin.composeshadow"
         versionCode = 1
         versionName = "0.0.1"
@@ -41,7 +41,7 @@ android {
     }
 }
 dependencies {
-    implementation(adamglin.androidx.appcompat)
-    implementation(adamglin.androidx.activity.compose)
-    implementation(projects.sample.shared)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.activity.compose)
+    implementation(project(":sample:shared"))
 }

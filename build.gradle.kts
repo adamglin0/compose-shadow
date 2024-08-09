@@ -1,10 +1,10 @@
 plugins {
-    alias(adamglin.plugins.android.applcation) apply false
-    alias(adamglin.plugins.android.library) apply false
-    alias(adamglin.plugins.android.test) apply false
-    alias(adamglin.plugins.androidxBaselineprofile) apply false
-    alias(adamglin.plugins.kotlin.jvm) apply false
-    alias(adamglin.plugins.kotlin.android) apply false
-    alias(adamglin.plugins.compose.compiler) apply false
-    alias(adamglin.plugins.kotlin.multiplatform) apply false
+    alias(libs.plugins.android.applcation) apply false
+    alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.android.test) apply false
+    alias(libs.plugins.androidxBaselineprofile) apply false
+    alias(libs.plugins.kotlin.jvm) apply false
+    alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.compose.compiler) apply false
+    alias(libs.plugins.kotlin.multiplatform) apply false
 }

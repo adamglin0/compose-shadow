@@ -1,4 +1,3 @@
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 pluginManagement {
     repositories {
         google()
@@ -16,15 +15,10 @@ dependencyResolutionManagement {
         mavenCentral()
         maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     }
-    versionCatalogs {
-        create("adamglin") {
-            from(files("/Users/adamglin/libs.versions.toml"))
-        }
-    }
 }
 
-rootProject.name = "compose-shadow"
-include(":drop-shadow")
+rootProject.name = "compose-shadow-project"
+include(":compose-shadow")
 // apps
 rootDir.resolve("./sample").listFiles()?.forEach {
     if (it.isDirectory) {

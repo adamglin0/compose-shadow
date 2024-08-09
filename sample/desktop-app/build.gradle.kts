@@ -1,9 +1,9 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 plugins {
-    alias(adamglin.plugins.kotlin.jvm)
-    alias(adamglin.plugins.compose.multiplatform)
-    alias(adamglin.plugins.compose.compiler)
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.compose.multiplatform)
+    alias(libs.plugins.compose.compiler)
 }
 
 dependencies {
@@ -14,7 +14,7 @@ dependencies {
     implementation(compose.components.uiToolingPreview)
     implementation(compose.desktop.currentOs)
 
-    implementation(projects.sample.shared)
+    implementation(project(":sample:shared"))
 }
 
 compose.desktop {

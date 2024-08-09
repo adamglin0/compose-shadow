@@ -3,10 +3,10 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 
 plugins {
-    alias(adamglin.plugins.kotlin.multiplatform)
-    alias(adamglin.plugins.compose.multiplatform)
-    alias(adamglin.plugins.compose.compiler)
-    alias(adamglin.plugins.android.library)
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.compose.multiplatform)
+    alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.android.library)
 }
 
 kotlin {
@@ -38,21 +38,21 @@ kotlin {
             implementation(compose.material3)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
-            implementation(projects.dropShadow)
+            implementation(project(":compose-shadow"))
         }
     }
 }
 
 android {
     namespace = "com.adamglin.composeshadow.shared"
-    compileSdk = adamglin.versions.androidCompileSdk.get().toInt()
+    compileSdk = libs.versions.androidCompileSdk.get().toInt()
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     sourceSets["main"].res.srcDirs("src/androidMain/res")
     sourceSets["main"].resources.srcDirs("src/commonMain/resources")
 
     defaultConfig {
-        minSdk = adamglin.versions.androidMinSdk.get().toInt()
-        lint.targetSdk = adamglin.versions.androidTargetSdk.get().toInt()
+        minSdk = libs.versions.androidMinSdk.get().toInt()
+        lint.targetSdk = libs.versions.androidTargetSdk.get().toInt()
     }
 
     packaging {
