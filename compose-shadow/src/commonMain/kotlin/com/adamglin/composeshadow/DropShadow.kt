@@ -25,6 +25,8 @@ import com.adamglin.composeshadow.utils.setMaskFilter
  * When you use this modifier in lower API, it will not have blur effect,
  * developer should use [Modifier.shadow] for lower API.
  *
+ * RequiresApi not work, because [google issue](https://issuetracker.google.com/issues/368779606)
+ *
  * @param shape The shape of the shadow.
  * @param color The color of the shadow.
  * @param offsetX The horizontal offset of the shadow.
