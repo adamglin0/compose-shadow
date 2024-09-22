@@ -34,7 +34,7 @@ import com.adamglin.composeshadow.utils.setMaskFilter
  * @param blur The blur radius of the shadow.
  * @param spread The spread radius of the shadow.
  */
-@RequiresApi(28)
+@RequiresApi(26)
 fun Modifier.dropShadow(
     shape: Shape,
     color: Color = Color.Black.copy(0.25f),
