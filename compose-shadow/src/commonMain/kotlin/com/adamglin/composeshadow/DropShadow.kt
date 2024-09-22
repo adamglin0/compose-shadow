@@ -1,6 +1,8 @@
 package com.adamglin.composeshadow
 
+import androidx.annotation.RequiresApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Paint
@@ -14,6 +16,23 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.adamglin.composeshadow.utils.setMaskFilter
 
+/**
+ * Adds a drop shadow to the content.
+ *
+ * For Android Developer:
+ *
+ * This modifier just support for Android API 28 and above.
+ * When you use this modifier in lower API, it will not have blur effect,
+ * developer should use [Modifier.shadow] for lower API.
+ *
+ * @param shape The shape of the shadow.
+ * @param color The color of the shadow.
+ * @param offsetX The horizontal offset of the shadow.
+ * @param offsetY The vertical offset of the shadow.
+ * @param blur The blur radius of the shadow.
+ * @param spread The spread radius of the shadow.
+ */
+@RequiresApi(28)
 fun Modifier.dropShadow(
     shape: Shape,
     color: Color = Color.Black.copy(0.25f),
