@@ -7,5 +7,5 @@ import androidx.compose.ui.graphics.NativePaint
 
 @RequiresApi(Build.VERSION_CODES.P)
 internal actual fun NativePaint.setMaskFilter(blurRadius: Float) {
-    maskFilter = BlurMaskFilter(blurRadius, android.graphics.BlurMaskFilter.Blur.NORMAL)
+    maskFilter = BlurMaskFilter(blurRadius, BlurMaskFilter.Blur.NORMAL)
 }
