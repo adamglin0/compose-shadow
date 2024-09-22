@@ -33,10 +33,10 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            compileOnly(compose.runtime)
-            compileOnly(compose.foundation)
-            compileOnly(compose.ui)
-            compileOnly(libs.androidx.annotation)
+            implementation(compose.runtime)
+            implementation(compose.foundation)
+            implementation(compose.ui)
+            implementation(libs.androidx.annotation)
         }
     }
 }
@@ -69,9 +69,6 @@ android {
 
 
 mavenPublishing {
-    val javadocJar = tasks.register("javadocJar", Jar::class.java) {
-        archiveClassifier.set("javadoc")
-    }
     coordinates(
         groupId = "com.adamglin",
         artifactId = "compose-shadow",
