@@ -3,7 +3,7 @@
 androidCompileSdk = "35"
 androidMinSdk = "21"
 androidTargetSdk = "35"
-androidGradlePlugin = "8.3.2"
+androidGradlePlugin = "8.6.1"
 #androidx
 androidxActivity = "1.9.2"
 androidxAppCompat = "1.7.0"
