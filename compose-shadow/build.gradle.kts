@@ -10,8 +10,8 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.compose.multiplatform)
-    id("org.jetbrains.dokka") version "1.9.20"
-    id("com.vanniktech.maven.publish") version "0.29.0"
+    alias(libs.plugins.dokka)
+    alias(libs.plugins.mavenPublish)
 }
 
 kotlin {
@@ -20,7 +20,6 @@ kotlin {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
         }
-        publishLibraryVariants("release", "debug")
     }
 
     jvm("desktop")
@@ -29,8 +28,10 @@ kotlin {
     iosArm64()
     iosSimulatorArm64()
 
+    macosX64()
+    macosArm64()
+
     sourceSets {
-        val desktopMain by getting
         commonMain.dependencies {
             compileOnly(compose.runtime)
             compileOnly(compose.foundation)

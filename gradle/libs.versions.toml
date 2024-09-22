@@ -16,6 +16,8 @@ composeMultiplatform = "1.7.0-beta02"
 composeBom = "2024.09.02"
 #other
 detekt = "1.23.5"
+dokka = "1.9.20"
+mavenPublish = "0.29.0"
 [libraries]
 #androidx
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "androidxAppCompat" }
@@ -36,3 +38,6 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 #compose
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }
+#dokka
+dokka = {id = "org.jetbrains.dokka", version.ref = "dokka"}
+mavenPublish = {id = "com.vanniktech.maven.publish", version.ref = "mavenPublish"}
