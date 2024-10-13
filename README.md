@@ -9,10 +9,11 @@ official implementation of a complete shadow in Compose.
 
 ## Version
 
-| compose-shadow | cmp           | kotlin |
-|----------------|---------------|--------|
-| 1.0.0          | 1.7.0-rc01    | 2.0.21 |
-| 0.0.1          | 1.7.0-dev1743 | 2.0.0  |
+| compose-shadow | cmp           | kotlin | main change  |
+|----------------|---------------|--------|--------------|
+| 1.1.0-beta01   | 1.7.0-rc01    | 2.0.21 | support wasm |
+| 1.0.0          | 1.7.0-rc01    | 2.0.21 | stable       |
+| 0.0.1          | 1.7.0-dev1743 | 2.0.0  | init         |
 
 ## Install
 
