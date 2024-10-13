@@ -23,6 +23,7 @@ kotlin {
         }
     }
 
+    applyDefaultHierarchyTemplate()
     jvm()
 
     iosX64()
