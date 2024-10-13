@@ -47,4 +47,5 @@ jobs:
 
       - name: Publish To Maven Central
         run: |
-          ./gradlew publishAndReleaseToMavenCentral --no-configuration-cache
+          cd ./compose-shadow 
+          ../gradlew publishAndReleaseToMavenCentral --no-configuration-cache
