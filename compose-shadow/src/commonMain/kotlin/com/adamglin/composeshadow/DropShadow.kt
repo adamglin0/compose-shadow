@@ -41,7 +41,7 @@ fun Modifier.dropShadow(
     offsetX: Dp = 0.dp,
     offsetY: Dp = 4.dp,
     blur: Dp = 4.dp,
-    spread: Dp = 0.dp
+    spread: Dp = 0.dp,
 ): Modifier {
     return this then DropShadowNodeElement(shape, color, offsetX, offsetY, blur, spread)
 }
