@@ -1,6 +1,5 @@
 package com.adamglin.composeshadow
 
-import androidx.annotation.RequiresApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Size
@@ -34,7 +33,6 @@ import com.adamglin.composeshadow.utils.setMaskFilter
  * @param blur The blur radius of the shadow.
  * @param spread The spread radius of the shadow.
  */
-@RequiresApi(26)
 fun Modifier.dropShadow(
     shape: Shape,
     color: Color = Color.Black.copy(0.25f),

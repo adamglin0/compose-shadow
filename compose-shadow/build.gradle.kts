@@ -1,7 +1,8 @@
-@file:OptIn(ExperimentalEncodingApi::class)
+@file:OptIn(ExperimentalEncodingApi::class, ExperimentalWasmDsl::class)
 
 import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import kotlin.io.encoding.ExperimentalEncodingApi
 
@@ -22,7 +23,7 @@ kotlin {
         }
     }
 
-    jvm("desktop")
+    jvm()
 
     iosX64()
     iosArm64()
@@ -31,12 +32,38 @@ kotlin {
     macosX64()
     macosArm64()
 
+    wasmJs {
+        browser()
+    }
+
     sourceSets {
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.ui)
-            implementation(libs.androidx.annotation)
+        }
+        val nonWebMain by creating {
+            dependsOn(commonMain.get())
+            dependencies {
+                implementation(libs.androidx.annotation)
+            }
+        }
+        val skikoMain by creating {
+            dependsOn(commonMain.get())
+        }
+        androidMain.configure {
+            dependsOn(nonWebMain)
+        }
+        jvmMain.configure {
+            dependsOn(skikoMain)
+            dependsOn(nonWebMain)
+        }
+        nativeMain.configure {
+            dependsOn(skikoMain)
+            dependsOn(nonWebMain)
+        }
+        wasmJsMain.configure {
+            dependsOn(skikoMain)
         }
     }
 }

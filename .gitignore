@@ -94,7 +94,6 @@ fabric.properties
 # Generated files
 bin/
 gen/
-out/
 
 # Gradle files
 .gradle
@@ -143,7 +142,6 @@ obj/
 
 # IntelliJ IDEA
 *.iml
-*.iws
 /out/
 
 # User-specific configurations
@@ -190,82 +188,39 @@ hs_err_pid*
 
 ## Plugin-specific files:
 
-# mpeltonen/sbt-idea plugin
-.idea_modules/
-
-# JIRA plugin
-atlassian-ide-plugin.xml
-
 # Mongo Explorer plugin
 .idea/mongoSettings.xml
-
-# Crashlytics plugin (for Android Studio and IntelliJ)
-com_crashlytics_export_strings.xml
-crashlytics.properties
-crashlytics-build.properties
-fabric.properties
 
 ### Example user template template
 ### Example user template
 
 # IntelliJ project files
 .idea
-*.iml
 out
 gen
 ### Kotlin template
-# Compiled class file
-*.class
-
-# Log file
-*.log
 
 # BlueJ files
 *.ctxt
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
-*.war
 *.nar
-*.ear
 *.zip
 *.tar.gz
 *.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+
 replay_pid*
 
-### Android template
-# Gradle files
-.gradle/
-build/
-
-# Local configuration file (sdk path, etc)
-local.properties
-
-# Log/OS Files
-*.log
-
 # Android Studio generated files and folders
-captures/
 .externalNativeBuild/
 .cxx/
-*.apk
 output.json
 
 # IntelliJ
-*.iml
 .idea/
 misc.xml
 deploymentTargetDropDown.xml
 render.experimental.xml
-
-# Keystore files
-*.jks
-*.keystore
 
 # Google Services (e.g. APIs or Firebase)
 google-services.json
@@ -274,3 +229,4 @@ google-services.json
 *.hprof
 
 .kotlin
+/kotlin-js-store
