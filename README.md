@@ -11,6 +11,7 @@ official implementation of a complete shadow in Compose.
 
 | compose-shadow | cmp           | kotlin |
 |----------------|---------------|--------|
+| 1.0.0          | 1.7.0-rc01    | 2.0.21 |
 | 0.0.1          | 1.7.0-dev1743 | 2.0.0  |
 
 ## Install
