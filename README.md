@@ -23,7 +23,7 @@ implementation("com.adamglin:compose-shadow:$version")
 
 compose-shadow supports platforms below.
 
-1. [x] android > 26
+1. [x] android > 28
 2. [x] ios
 3. [x] desktop(jvm)
 
