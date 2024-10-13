@@ -99,7 +99,7 @@ mavenPublishing {
     coordinates(
         groupId = "com.adamglin",
         artifactId = "compose-shadow",
-        version = "1.0.0"
+        version = "1.1.0-beta01"
     )
     pom {
         name.set("compose-shadow")
