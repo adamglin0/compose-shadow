@@ -23,7 +23,7 @@ kotlin {
         }
     }
 
-    jvm("desktop")
+    jvm()
 
     iosX64()
     iosArm64()
@@ -32,28 +32,39 @@ kotlin {
     macosX64()
     macosArm64()
 
-    wasmJs()
+    wasmJs {
+        browser()
+    }
 
     sourceSets {
-        val commonMain by getting {
+        commonMain.dependencies {
+            implementation(compose.runtime)
+            implementation(compose.foundation)
+            implementation(compose.ui)
+        }
+        val nonWebMain by creating {
+            dependsOn(commonMain.get())
             dependencies {
-                implementation(compose.runtime)
-                implementation(compose.foundation)
-                implementation(compose.ui)
                 implementation(libs.androidx.annotation)
             }
         }
         val skikoMain by creating {
-            dependsOn(commonMain)
+            dependsOn(commonMain.get())
         }
-        nativeMain.configure { dependsOn(skikoMain) }
-        val desktopMain by getting {
+        androidMain.configure {
+            dependsOn(nonWebMain)
+        }
+        jvmMain.configure {
+            dependsOn(skikoMain)
+            dependsOn(nonWebMain)
+        }
+        nativeMain.configure {
+            dependsOn(skikoMain)
+            dependsOn(nonWebMain)
+        }
+        wasmJsMain.configure {
             dependsOn(skikoMain)
         }
-        val wasmJsMain by getting {
-            dependsOn(skikoMain)
-        }
-
     }
 }
 

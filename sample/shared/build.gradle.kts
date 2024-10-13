@@ -1,4 +1,7 @@
+@file:OptIn(ExperimentalWasmDsl::class)
+
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 
@@ -16,7 +19,7 @@ kotlin {
             jvmTarget.set(JvmTarget.JVM_11)
         }
     }
-    jvm("desktop")
+    jvm()
     listOf(
         iosArm64(),
         iosX64(),
@@ -28,8 +31,14 @@ kotlin {
         }
     }
 
+    wasmJs {
+        moduleName = "composeApp"
+        browser {
+        }
+        binaries.executable()
+    }
+
     sourceSets {
-        val desktopMain by getting
         commonMain.dependencies {
             // compose multiplatform
             implementation(compose.runtime)
