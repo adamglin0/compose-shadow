@@ -4,8 +4,8 @@ import android.graphics.BlurMaskFilter
 import android.graphics.PorterDuffXfermode
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.NativePaint
-import org.jetbrains.skia.BlendMode
 
 @RequiresApi(Build.VERSION_CODES.P)
 internal actual fun NativePaint.setMaskFilter(blurRadius: Float) {

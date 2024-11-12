@@ -4,6 +4,7 @@ import androidx.annotation.RequiresApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.NativePaint
 import androidx.compose.ui.graphics.Paint
@@ -17,7 +18,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.adamglin.composeshadow.utils.setBlendMode
 import com.adamglin.composeshadow.utils.setMaskFilter
-import org.jetbrains.skia.BlendMode
 
 @RequiresApi(26)
 fun Modifier.innerShadow(
@@ -76,7 +76,7 @@ private class InnerShadowNode(
             canvas.drawOutline(shadowOutline, paint)
 
             val frameworkPaint = paint.asFrameworkPaint() as NativePaint
-            frameworkPaint.setBlendMode(BlendMode.DST_OUT)
+            frameworkPaint.setBlendMode(BlendMode.DstOut)
             if (blur.toPx() > 0) {
                 frameworkPaint.setMaskFilter(blur.toPx())
             }
