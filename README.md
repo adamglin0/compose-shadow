@@ -1,36 +1,37 @@
 # Compose Shadow
 
-a kotlin platform library for show drop shadow in compose. This library will continue to be actively updated until the
-official implementation of a complete shadow in Compose.
+A Kotlin Multiplatform implementation of drop shadows for Compose Multiplatform.
+
+This library will continue to be maintained until this is officially supported in Compose.
 
 ![Maven Central Version](https://img.shields.io/maven-central/v/com.adamglin/compose-shadow)
 
 ---
 
-## Version
+## Versions
 
-| compose-shadow | cmp           | kotlin |
-|----------------|---------------|--------|
-| 1.0.0          | 1.7.0-rc01    | 2.0.21 |
-| 0.0.1          | 1.7.0-dev1743 | 2.0.0  |
+| `compose-shadow` | CMP           | Kotlin |
+|------------------|---------------|--------|
+| 1.0.0            | 1.7.0-rc01    | 2.0.21 |
+| 0.0.1            | 1.7.0-dev1743 | 2.0.0  |
 
-## Install
+## Installation
 
 ```kts
 implementation("com.adamglin:compose-shadow:$version")
 ```
 
-## Support
+## Platform support
 
-compose-shadow supports platforms below.
+`compose-shadow` supports these platforms:
 
-1. [x] android > 28
-2. [x] ios
-3. [x] desktop(jvm)
+1. [x] Android (SDK > 28)
+2. [x] iOS
+3. [x] Desktop (JVM)
 
-## Using
+## Usage
 
-add dropShadow by `Modifier`.
+Apply and customize shadow using the `dropShadow` Modifier:
 
 ```kotlin
 Box(
