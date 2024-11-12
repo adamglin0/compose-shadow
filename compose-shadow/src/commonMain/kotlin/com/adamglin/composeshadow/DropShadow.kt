@@ -5,6 +5,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.NativePaint
 import androidx.compose.ui.graphics.Paint
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.drawOutline
@@ -82,7 +83,7 @@ private class DropShadowNode(
         val paint = Paint()
         paint.color = color
         if (blur.value > 0) {
-            paint.asFrameworkPaint().apply {
+            (paint.asFrameworkPaint() as NativePaint).apply {
                 setMaskFilter(blur.toPx())
             }
         }
