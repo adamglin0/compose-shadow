@@ -16,13 +16,11 @@ composeMultiplatform = "1.7.0"
 #other
 dokka = "1.9.20"
 mavenPublish = "0.30.0"
-
 [libraries]
 #androidx
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "androidxAppCompat" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidxActivity" }
 androidx-annotation = { module = "androidx.annotation:annotation", version.ref = "androidxAnnotation" }
-
 [plugins]
 #android
 android-applcation = { id = "com.android.application", version.ref = "androidGradlePlugin" }
