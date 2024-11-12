@@ -37,7 +37,6 @@ kotlin {
             implementation(compose.foundation)
             implementation(compose.ui)
             implementation(libs.androidx.annotation)
-            implementation(libs.skiko)
         }
     }
 }
