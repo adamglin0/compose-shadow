@@ -1,5 +1,6 @@
 import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -28,6 +29,15 @@ kotlin {
     macosX64()
     macosArm64()
 
+    js(IR) {
+        browser()
+    }
+
+    @OptIn(ExperimentalWasmDsl::class)
+    wasmJs {
+        browser()
+    }
+
     applyDefaultHierarchyTemplate()
 
     sourceSets {
@@ -44,6 +54,12 @@ kotlin {
             dependsOn(skikoMain)
         }
         appleMain {
+            dependsOn(skikoMain)
+        }
+        jsMain {
+            dependsOn(skikoMain)
+        }
+        wasmJsMain {
             dependsOn(skikoMain)
         }
     }
@@ -110,4 +126,3 @@ mavenPublishing {
     publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
     signAllPublications()
 }
-
