@@ -10,6 +10,7 @@ plugins {
     alias(libs.plugins.compose.multiplatform)
     alias(libs.plugins.dokka)
     alias(libs.plugins.mavenPublish)
+    alias(libs.plugins.binaryCompatibilityValidator)
 }
 
 kotlin {
