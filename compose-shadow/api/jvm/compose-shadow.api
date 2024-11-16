@@ -1,0 +1,10 @@
+public final class com/adamglin/composeshadow/DropShadowKt {
+	public static final fun dropShadow-ymrBvOg (Landroidx/compose/ui/Modifier;Landroidx/compose/ui/graphics/Shape;JFFFF)Landroidx/compose/ui/Modifier;
+	public static synthetic fun dropShadow-ymrBvOg$default (Landroidx/compose/ui/Modifier;Landroidx/compose/ui/graphics/Shape;JFFFFILjava/lang/Object;)Landroidx/compose/ui/Modifier;
+}
+
+public final class com/adamglin/composeshadow/InnerShadowKt {
+	public static final fun innerShadow-ymrBvOg (Landroidx/compose/ui/Modifier;Landroidx/compose/ui/graphics/Shape;JFFFF)Landroidx/compose/ui/Modifier;
+	public static synthetic fun innerShadow-ymrBvOg$default (Landroidx/compose/ui/Modifier;Landroidx/compose/ui/graphics/Shape;JFFFFILjava/lang/Object;)Landroidx/compose/ui/Modifier;
+}
+
