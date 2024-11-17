@@ -48,7 +48,9 @@ Box(
         .background(Color.White),
 )
 ```
-
+## Sample
+We provided this address [here](https://adamglin0.github.io/compose-shadow/sample/index.html) for viewing the wasm online examples.
+### Screenshots
 <img width="300" alt="image" src="https://github.com/user-attachments/assets/36d15219-d4ea-4de9-84fe-df2cbceb0e2e">
 <img width="300" alt="image" src="https://github.com/user-attachments/assets/cf1b42d1-5d92-4259-93a6-f0883b7d9dc7">
 <img width="300" alt="image" src="https://github.com/user-attachments/assets/52f1bc30-2315-4569-bbb9-4bbb385ab07c">
