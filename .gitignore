@@ -274,3 +274,8 @@ google-services.json
 *.hprof
 
 .kotlin
+
+.DS_Store
+*.swp
+
+UserInterfaceState.xcuserstate

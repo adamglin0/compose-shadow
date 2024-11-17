@@ -32,9 +32,6 @@ kotlin {
         }
     }
 
-    macosX64()
-    macosArm64()
-
     js(IR) {
         moduleName = "sharedApp"
         browser {
@@ -56,15 +53,13 @@ kotlin {
         binaries.executable()
     }
 
-    applyDefaultHierarchyTemplate()
-
     sourceSets {
         val desktopMain by getting
         commonMain.dependencies {
-            // compose multiplatform
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.ui)
+            implementation(compose.uiUtil)
             implementation(compose.material3)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
@@ -134,4 +129,9 @@ compose.desktop {
             packageVersion = "1.0.0"
         }
     }
+}
+
+tasks.named("jsProductionExecutableCompileSync") {
+    mustRunAfter("wasmJsBrowserProductionWebpack")
+    mustRunAfter("wasmJsBrowserDistribution")
 }
