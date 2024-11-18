@@ -1,216 +1,368 @@
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
-import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeContent
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.BasicText
-import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.adamglin.composeshadow.dropShadow
+import com.adamglin.composeshadow.innerShadow
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import org.jetbrains.compose.ui.tooling.preview.Preview
+import kotlin.random.Random
 
 @Composable
 fun SampleApp() {
-    val safePaddings = WindowInsets.safeContent.asPaddingValues()
-    Column(
-        modifier = Modifier
-            .background(Color.Magenta.copy(.1f))
-            .padding(safePaddings)
-            .padding(horizontal = 20.dp)
-    ) {
-        LazyVerticalGrid(
-            modifier = Modifier
-                .background(Color.Red.copy(.1f))
-                .weight(1f)
-                .fillMaxWidth(),
-            contentPadding = PaddingValues(20.dp),
-            columns = GridCells.Fixed(2),
-            verticalArrangement = Arrangement.spacedBy(30.dp),
-            horizontalArrangement = Arrangement.spacedBy(30.dp),
-            userScrollEnabled = true,
-        ) {
-            item {
-                BoxWithShadow(
-                    shape = RectangleShape,
-                    color = Color.Black.copy(alpha = 0.25f),
-                    offsetX = 4.dp,
-                    offsetY = 4.dp,
-                    blur = 4.dp,
-                    spread = 4.dp,
-                )
-            }
-            item {
-                BoxWithShadow(
-                    shape = CircleShape,
-                    color = Color.Red,
-                    offsetX = 4.dp,
-                    offsetY = 4.dp,
-                    blur = 4.dp,
-                    spread = 4.dp,
-                )
-            }
-            item {
-                BoxWithShadow(
-                    shape = RoundedCornerShape(20.dp),
-                    color = Color.Black.copy(alpha = 0.5f),
-                    offsetX = (-4).dp,
-                    offsetY = (-4).dp,
-                    blur = 4.dp,
-                    spread = 4.dp,
-                )
-            }
-            item {
-                BoxWithShadow(
-                    shape = RoundedCornerShape(20.dp),
-                    color = Color.Black.copy(alpha = 0.5f),
-                    offsetX = 0.dp,
-                    offsetY = 0.dp,
-                    blur = 4.dp,
-                    spread = 4.dp,
-                )
-            }
-            item {
-                BoxWithShadow(
-                    shape = RoundedCornerShape(20.dp),
-                    color = Color.Black.copy(alpha = 0.5f),
-                    offsetX = 0.dp,
-                    offsetY = 0.dp,
-                    blur = 0.dp,
-                    spread = 0.dp,
-                )
-            }
-            item {
-                BoxWithShadow(
-                    shape = RoundedCornerShape(20.dp),
-                    color = Color.Black.copy(alpha = 0.5f),
-                    offsetX = 0.dp,
-                    offsetY = 0.dp,
-                    blur = 10.dp,
-                    spread = 0.dp,
-                )
-            }
-            item {
-                BoxWithShadow(
-                    shape = RoundedCornerShape(20.dp),
-                    color = Color.Black.copy(alpha = 0.5f),
-                    offsetX = 0.dp,
-                    offsetY = 0.dp,
-                    blur = 0.dp,
-                    spread = 10.dp,
-                )
-            }
-            item {
-                Box(
-                    Modifier.fillMaxWidth().aspectRatio(1f)
-                        .dropShadow(
-                            shape = RectangleShape,
-                            color = Color.Black.copy(.1f),
-                            offsetX = 4.dp,
-                            offsetY = 4.dp,
-                            blur = 4.dp,
-                            spread = 4.dp,
-                        )
-                        .dropShadow(
-                            shape = RectangleShape,
-                            color = Color.Red.copy(.6f),
-                            offsetX = 5.dp,
-                            offsetY = (-8).dp,
-                            blur = 4.dp,
-                            spread = 4.dp,
-                        )
-                        .dropShadow(
-                            shape = RectangleShape,
-                            color = Color.Blue.copy(.2f),
-                            offsetX = 8.dp,
-                            offsetY = 8.dp,
-                            blur = 8.dp,
-                            spread = 8.dp,
-                        )
-                        .background(Color.White, RectangleShape),
-                    contentAlignment = Alignment.Center,
+    LazyColumn {
+        item {
+            Column {
+                SecondTitle("Different Sizes")
+                Row(
+                    modifier = Modifier.horizontalScroll(rememberScrollState()).padding(10.dp),
+                    horizontalArrangement = Arrangement.spacedBy(20.dp)
                 ) {
-                    BasicText("4,4,4,4")
+                    repeat(5) {
+                        val size = it * 2
+                        Box(
+                            modifier = Modifier
+                                .size(50.dp)
+                                .dropShadow(
+                                    shape = RectangleShape,
+                                    offsetX = size.dp,
+                                    offsetY = size.dp,
+                                )
+                                .background(Color.White),
+                            contentAlignment = Alignment.Center,
+                        ) {
+                            Text("$size × $size", fontSize = 10.sp)
+                        }
+                    }
                 }
             }
         }
-        Spacer(Modifier.height(10.dp))
-        Column {
-            var offsetX by remember { mutableStateOf(0f) }
-            var offsetY by remember { mutableStateOf(0f) }
-            var blur by remember { mutableStateOf(4f) }
-            var spread by remember { mutableStateOf(4f) }
-            Box(
-                Modifier
-                    .dropShadow(
-                        shape = RectangleShape,
-                        color = Color.Black.copy(.5f),
-                        offsetX = offsetX.dp,
-                        offsetY = offsetY.dp,
-                        blur = blur.dp,
-                        spread = spread.dp,
-                    )
-                    .fillMaxWidth()
-                    .height(100.dp)
-                    .background(Color.White.copy(.5f), RectangleShape),
-                contentAlignment = Alignment.Center,
-            ) {
-                Text("$offsetX,$offsetY,$blur,$spread")
+        item {
+            Column {
+                SecondTitle("Different Shapes")
+                Row(
+                    modifier = Modifier.horizontalScroll(rememberScrollState()).padding(10.dp),
+                    horizontalArrangement = Arrangement.spacedBy(20.dp)
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .size(50.dp)
+                            .dropShadow(shape = RectangleShape)
+                            .background(Color.White),
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        Text("Rect", fontSize = 10.sp)
+                    }
+                    val round = RoundedCornerShape(10.dp)
+                    Box(
+                        modifier = Modifier
+                            .size(50.dp)
+                            .dropShadow(shape = round)
+                            .clip(round)
+                            .background(Color.White, shape = round),
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        Text("Round", fontSize = 10.sp)
+                    }
+                    Box(
+                        modifier = Modifier
+                            .size(50.dp)
+                            .dropShadow(shape = CircleShape)
+                            .clip(CircleShape)
+                            .background(Color.White, shape = CircleShape),
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        Text("Round", fontSize = 10.sp)
+                    }
+                }
             }
-            Slider(offsetX, onValueChange = { offsetX = it }, valueRange = -20f..20f)
-            Slider(offsetY, onValueChange = { offsetY = it }, valueRange = -20f..20f)
-            Slider(blur, onValueChange = { blur = it }, valueRange = 0f..20f)
-            Slider(spread, onValueChange = { spread = it }, valueRange = -20f..20f)
+        }
+        item {
+            Column {
+                SecondTitle("Different Colors")
+                Row(
+                    modifier = Modifier.horizontalScroll(rememberScrollState()).padding(10.dp),
+                    horizontalArrangement = Arrangement.spacedBy(20.dp)
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .size(50.dp)
+                            .dropShadow(shape = CircleShape, color = Color.Red)
+                            .clip(CircleShape)
+                            .background(Color.White, shape = CircleShape),
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        Text("Red", fontSize = 10.sp)
+                    }
+                    Box(
+                        modifier = Modifier
+                            .size(50.dp)
+                            .dropShadow(shape = CircleShape, color = Color.Green)
+                            .clip(CircleShape)
+                            .background(Color.White, shape = CircleShape),
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        Text("Green", fontSize = 10.sp)
+                    }
+                    Box(
+                        modifier = Modifier
+                            .size(50.dp)
+                            .dropShadow(shape = CircleShape, color = Color.Blue)
+                            .clip(CircleShape)
+                            .background(Color.White, shape = CircleShape),
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        Text("Blue", fontSize = 10.sp)
+                    }
+                    AnimationColorfulCircleBox()
+                }
+            }
+        }
+        item {
+            Column {
+                SecondTitle("Different Spread")
+                Row(
+                    modifier = Modifier.horizontalScroll(rememberScrollState()).padding(10.dp),
+                    horizontalArrangement = Arrangement.spacedBy(20.dp)
+                ) {
+                    repeat(5) {
+                        val size = it * 2
+                        Box(
+                            modifier = Modifier
+                                .size(50.dp)
+                                .dropShadow(
+                                    shape = RectangleShape,
+                                    offsetX = 0.dp,
+                                    offsetY = 0.dp,
+                                    spread = size.dp,
+                                )
+                                .background(Color.White),
+                            contentAlignment = Alignment.Center,
+                        ) {
+                            Text("$size", fontSize = 10.sp)
+                        }
+                    }
+                }
+            }
+        }
+        item {
+            Column {
+                SecondTitle("Different Blur")
+                Row(
+                    modifier = Modifier.horizontalScroll(rememberScrollState()).padding(10.dp),
+                    horizontalArrangement = Arrangement.spacedBy(20.dp)
+                ) {
+                    repeat(5) {
+                        val size = it * 2
+                        Box(
+                            modifier = Modifier
+                                .size(50.dp)
+                                .dropShadow(
+                                    shape = RectangleShape,
+                                    offsetX = 0.dp,
+                                    offsetY = 0.dp,
+                                    blur = size.dp,
+                                )
+                                .background(Color.White),
+                            contentAlignment = Alignment.Center,
+                        ) {
+                            Text("$size", fontSize = 10.sp)
+                        }
+                    }
+                }
+            }
+        }
+        item {
+            Column {
+                SecondTitle("Inner Shadow")
+                Row(
+                    modifier = Modifier.horizontalScroll(rememberScrollState()).padding(10.dp),
+                    horizontalArrangement = Arrangement.spacedBy(20.dp)
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .size(50.dp)
+                            .innerShadow(
+                                shape = RectangleShape,
+                                color = Color.Red,
+                                offsetX = 0.dp,
+                                offsetY = 0.dp,
+                                blur = 2.dp,
+                                spread = 0.dp,
+                            )
+                            .background(Color.White),
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        Text("blur 2", fontSize = 10.sp)
+                    }
+                    Box(
+                        modifier = Modifier
+                            .size(50.dp)
+                            .background(Color.White)
+                            .innerShadow(
+                                shape = RectangleShape,
+                                color = Color.Red,
+                                offsetX = 5.dp,
+                                offsetY = 5.dp,
+                                blur = 4.dp,
+                                spread = 4.dp,
+                            ),
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        Text("size 5", fontSize = 10.sp)
+                    }
+                    Box(
+                        modifier = Modifier
+                            .size(50.dp)
+                            .background(Color.White, CircleShape)
+                            .innerShadow(
+                                shape = CircleShape,
+                                color = Color.Red,
+                                offsetX = 5.dp,
+                                offsetY = 5.dp,
+                                blur = 4.dp,
+                                spread = 4.dp,
+                            ),
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        Text("circle", fontSize = 10.sp)
+                    }
+                    Box(
+                        modifier = Modifier
+                            .size(50.dp)
+                            .background(Color.White, CircleShape)
+                            .innerShadow(
+                                shape = CircleShape,
+                                color = Color.Red,
+                                offsetX = (-5).dp,
+                                offsetY = (-5).dp,
+                                blur = 4.dp,
+                                spread = 4.dp,
+                            ),
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        Text("size-5", fontSize = 10.sp)
+                    }
+                }
+            }
         }
     }
 }
 
 @Composable
-fun BoxWithShadow(
-    shape: Shape,
-    color: Color,
-    offsetX: Dp,
-    offsetY: Dp,
-    blur: Dp,
-    spread: Dp,
-    modifier: Modifier = Modifier,
+fun SecondTitle(
+    text: String,
+    modifier: Modifier = Modifier
 ) {
+    Text(text, modifier = modifier, fontSize = 24.sp, fontWeight = FontWeight.Medium)
+}
+
+@Composable
+fun AnimationColorfulCircleBox(modifier: Modifier = Modifier) {
+    val infiniteTransition = rememberInfiniteTransition()
+    val x0 = remember { Animatable(0f) }
+    val y0 = remember { Animatable(0f) }
+    val x1 = remember { Animatable(0f) }
+    val y1 = remember { Animatable(0f) }
+    val x2 = remember { Animatable(0f) }
+    val y2 = remember { Animatable(0f) }
+    LaunchedEffect(Unit) {
+        launch {
+            while (true) {
+                val d = (1000..3000).random()
+                x0.animateTo((-5..5).random().toFloat(), animationSpec = tween(d))
+                delay(d.toLong())
+            }
+        }
+        launch {
+            while (true) {
+                val d = (1000..3000).random()
+                x1.animateTo((-5..5).random().toFloat(), animationSpec = tween(d))
+                delay(d.toLong())
+            }
+        }
+        launch {
+            while (true) {
+                val d = (1000..3000).random()
+                x2.animateTo((-5..5).random().toFloat(), animationSpec = tween(d))
+                delay(d.toLong())
+            }
+        }
+        launch {
+            while (true) {
+                val d = (1000..3000).random()
+                y0.animateTo((-5..5).random().toFloat(), animationSpec = tween(d))
+                delay(d.toLong())
+            }
+        }
+        launch {
+            while (true) {
+                val d = (1000..3000).random()
+                y1.animateTo((-5..5).random().toFloat(), animationSpec = tween(d))
+                delay(d.toLong())
+            }
+        }
+        launch {
+            while (true) {
+                val d = (1000..3000).random()
+                y2.animateTo((-5..5).random().toFloat(), animationSpec = tween(d))
+                delay(d.toLong())
+            }
+        }
+    }
     Box(
-        modifier
-            .fillMaxWidth().aspectRatio(1f)
+        modifier = Modifier
+            .size(50.dp)
+            .dropShadow(shape = CircleShape, color = Color(0xff5869C1), offsetX = 1.dp, offsetY = 3.dp)
             .dropShadow(
-                shape = shape,
-                color = color,
-                offsetX = offsetX,
-                offsetY = offsetY,
-                blur = blur,
-                spread = spread,
+                shape = CircleShape,
+                color = Color(0xff11BFA5),
+                offsetX = x0.value.dp,
+                offsetY = y0.value.dp
             )
-            .background(Color.White, shape),
+            .dropShadow(
+                shape = CircleShape,
+                color = Color(0xffFFF6E9),
+                offsetX = x1.value.dp,
+                offsetY = y1.value.dp
+            )
+            .dropShadow(
+                shape = CircleShape,
+                color = Color(0xffD8FFE8),
+                offsetX = x2.value.dp,
+                offsetY = y2.value.dp
+            )
+            .clip(CircleShape)
+            .background(Color.White, shape = CircleShape),
         contentAlignment = Alignment.Center,
     ) {
-        Text("${offsetX.value},${offsetY.value},${blur.value},${spread.value}")
+        Text("Complex", fontSize = 10.sp)
+    }
+}
+
+@Preview
+@Composable
+private fun SampleAppPreview() {
+    Box(modifier = Modifier.padding(40.dp)) {
+        SampleApp()
     }
 }
