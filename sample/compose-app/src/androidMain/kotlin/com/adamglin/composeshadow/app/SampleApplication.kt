@@ -1,4 +1,4 @@
-package com.admaglin.composeshadow.app
+package com.adamglin.composeshadow.app
 
 import android.app.Application
 import android.content.Context
