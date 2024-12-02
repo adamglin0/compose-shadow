@@ -12,6 +12,7 @@ This library will continue to be maintained until this is officially supported i
 
 | `compose-shadow` | CMP           | Kotlin |
 |------------------|---------------|--------|
+| 2.0.1            | 1.7.1         | 2.1.0  |
 | 2.0.0            | 1.7.1         | 2.0.21 |
 | 1.0.0            | 1.7.0-rc01    | 2.0.21 |
 
