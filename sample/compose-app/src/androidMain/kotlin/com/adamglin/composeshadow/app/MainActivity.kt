@@ -22,6 +22,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
+import com.adamglin.composeshadow.SoftLayerShadowContainer
 import com.adamglin.composeshadow.softLayerShadow
 
 class MainActivity : ComponentActivity() {
@@ -29,8 +30,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            Column {
-                SoftLayerShadowContainer{
+            SoftLayerShadowContainer{
+                Column {
+
                     Box(
                         modifier = Modifier
                             .padding(40.dp)
@@ -40,25 +42,10 @@ class MainActivity : ComponentActivity() {
                             .requiredSize(100.dp)
                             .background(Color.White)
                     )
+                    SampleApp()
                 }
-                SampleApp()
             }
         }
     }
 }
 
-@Composable
-fun SoftLayerShadowContainer(content: @Composable () -> Unit) {
-    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
-        AndroidView(
-            factory = { context ->
-                ComposeView(context).apply {
-                    setLayerType(View.LAYER_TYPE_SOFTWARE, null)
-                    setContent(content)
-                }
-            }
-        )
-    } else {
-        content()
-    }
-}
