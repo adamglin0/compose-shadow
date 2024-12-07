@@ -71,10 +71,7 @@ android {
     compileSdk = libs.versions.androidCompileSdk.get().toInt()
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
 
-    defaultConfig {
-        minSdk = libs.versions.androidMinSdk.get().toInt()
-        lint.targetSdk = libs.versions.androidTargetSdk.get().toInt()
-    }
+    defaultConfig {}
 
     packaging {
         resources {
