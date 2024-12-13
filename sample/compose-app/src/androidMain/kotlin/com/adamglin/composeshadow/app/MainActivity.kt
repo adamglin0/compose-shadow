@@ -1,4 +1,4 @@
-package com.admaglin.composeshadow.app
+package com.adamglin.composeshadow.app
 
 import SampleApp
 import android.os.Bundle
