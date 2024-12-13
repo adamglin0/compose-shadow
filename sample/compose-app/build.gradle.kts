@@ -63,6 +63,7 @@ kotlin {
             implementation(compose.material3)
             implementation(compose.components.uiToolingPreview)
             implementation(project(":compose-shadow"))
+            implementation(libs.colorPicker)
         }
 
         desktopMain.dependencies {

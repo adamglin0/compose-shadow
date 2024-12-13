@@ -1,368 +1,339 @@
-import androidx.compose.animation.core.*
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.VectorConverter
 import androidx.compose.foundation.background
-import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.adamglin.composeshadow.dropShadow
 import com.adamglin.composeshadow.innerShadow
-import kotlinx.coroutines.delay
+import com.github.skydoves.colorpicker.compose.AlphaSlider
+import com.github.skydoves.colorpicker.compose.BrightnessSlider
+import com.github.skydoves.colorpicker.compose.HsvColorPicker
+import com.github.skydoves.colorpicker.compose.rememberColorPickerController
 import kotlinx.coroutines.launch
-import org.jetbrains.compose.ui.tooling.preview.Preview
-import kotlin.random.Random
+import kotlin.math.pow
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SampleApp() {
-    LazyColumn {
-        item {
-            Column {
-                SecondTitle("Different Sizes")
-                Row(
-                    modifier = Modifier.horizontalScroll(rememberScrollState()).padding(10.dp),
-                    horizontalArrangement = Arrangement.spacedBy(20.dp)
-                ) {
-                    repeat(5) {
-                        val size = it * 2
-                        Box(
-                            modifier = Modifier
-                                .size(50.dp)
-                                .dropShadow(
-                                    shape = RectangleShape,
-                                    offsetX = size.dp,
-                                    offsetY = size.dp,
-                                )
-                                .background(Color.White),
-                            contentAlignment = Alignment.Center,
-                        ) {
-                            Text("$size × $size", fontSize = 10.sp)
-                        }
-                    }
-                }
-            }
-        }
-        item {
-            Column {
-                SecondTitle("Different Shapes")
-                Row(
-                    modifier = Modifier.horizontalScroll(rememberScrollState()).padding(10.dp),
-                    horizontalArrangement = Arrangement.spacedBy(20.dp)
-                ) {
-                    Box(
-                        modifier = Modifier
-                            .size(50.dp)
-                            .dropShadow(shape = RectangleShape)
-                            .background(Color.White),
-                        contentAlignment = Alignment.Center,
-                    ) {
-                        Text("Rect", fontSize = 10.sp)
-                    }
-                    val round = RoundedCornerShape(10.dp)
-                    Box(
-                        modifier = Modifier
-                            .size(50.dp)
-                            .dropShadow(shape = round)
-                            .clip(round)
-                            .background(Color.White, shape = round),
-                        contentAlignment = Alignment.Center,
-                    ) {
-                        Text("Round", fontSize = 10.sp)
-                    }
-                    Box(
-                        modifier = Modifier
-                            .size(50.dp)
-                            .dropShadow(shape = CircleShape)
-                            .clip(CircleShape)
-                            .background(Color.White, shape = CircleShape),
-                        contentAlignment = Alignment.Center,
-                    ) {
-                        Text("Round", fontSize = 10.sp)
-                    }
-                }
-            }
-        }
-        item {
-            Column {
-                SecondTitle("Different Colors")
-                Row(
-                    modifier = Modifier.horizontalScroll(rememberScrollState()).padding(10.dp),
-                    horizontalArrangement = Arrangement.spacedBy(20.dp)
-                ) {
-                    Box(
-                        modifier = Modifier
-                            .size(50.dp)
-                            .dropShadow(shape = CircleShape, color = Color.Red)
-                            .clip(CircleShape)
-                            .background(Color.White, shape = CircleShape),
-                        contentAlignment = Alignment.Center,
-                    ) {
-                        Text("Red", fontSize = 10.sp)
-                    }
-                    Box(
-                        modifier = Modifier
-                            .size(50.dp)
-                            .dropShadow(shape = CircleShape, color = Color.Green)
-                            .clip(CircleShape)
-                            .background(Color.White, shape = CircleShape),
-                        contentAlignment = Alignment.Center,
-                    ) {
-                        Text("Green", fontSize = 10.sp)
-                    }
-                    Box(
-                        modifier = Modifier
-                            .size(50.dp)
-                            .dropShadow(shape = CircleShape, color = Color.Blue)
-                            .clip(CircleShape)
-                            .background(Color.White, shape = CircleShape),
-                        contentAlignment = Alignment.Center,
-                    ) {
-                        Text("Blue", fontSize = 10.sp)
-                    }
-                    AnimationColorfulCircleBox()
-                }
-            }
-        }
-        item {
-            Column {
-                SecondTitle("Different Spread")
-                Row(
-                    modifier = Modifier.horizontalScroll(rememberScrollState()).padding(10.dp),
-                    horizontalArrangement = Arrangement.spacedBy(20.dp)
-                ) {
-                    repeat(5) {
-                        val size = it * 2
-                        Box(
-                            modifier = Modifier
-                                .size(50.dp)
-                                .dropShadow(
-                                    shape = RectangleShape,
-                                    offsetX = 0.dp,
-                                    offsetY = 0.dp,
-                                    spread = size.dp,
-                                )
-                                .background(Color.White),
-                            contentAlignment = Alignment.Center,
-                        ) {
-                            Text("$size", fontSize = 10.sp)
-                        }
-                    }
-                }
-            }
-        }
-        item {
-            Column {
-                SecondTitle("Different Blur")
-                Row(
-                    modifier = Modifier.horizontalScroll(rememberScrollState()).padding(10.dp),
-                    horizontalArrangement = Arrangement.spacedBy(20.dp)
-                ) {
-                    repeat(5) {
-                        val size = it * 2
-                        Box(
-                            modifier = Modifier
-                                .size(50.dp)
-                                .dropShadow(
-                                    shape = RectangleShape,
-                                    offsetX = 0.dp,
-                                    offsetY = 0.dp,
-                                    blur = size.dp,
-                                )
-                                .background(Color.White),
-                            contentAlignment = Alignment.Center,
-                        ) {
-                            Text("$size", fontSize = 10.sp)
-                        }
-                    }
-                }
-            }
-        }
-        item {
-            Column {
-                SecondTitle("Inner Shadow")
-                Row(
-                    modifier = Modifier.horizontalScroll(rememberScrollState()).padding(10.dp),
-                    horizontalArrangement = Arrangement.spacedBy(20.dp)
-                ) {
-                    Box(
-                        modifier = Modifier
-                            .size(50.dp)
-                            .innerShadow(
-                                shape = RectangleShape,
-                                color = Color.Red,
-                                offsetX = 0.dp,
-                                offsetY = 0.dp,
-                                blur = 2.dp,
-                                spread = 0.dp,
-                            )
-                            .background(Color.White),
-                        contentAlignment = Alignment.Center,
-                    ) {
-                        Text("blur 2", fontSize = 10.sp)
-                    }
-                    Box(
-                        modifier = Modifier
-                            .size(50.dp)
-                            .background(Color.White)
-                            .innerShadow(
-                                shape = RectangleShape,
-                                color = Color.Red,
-                                offsetX = 5.dp,
-                                offsetY = 5.dp,
-                                blur = 4.dp,
-                                spread = 4.dp,
-                            ),
-                        contentAlignment = Alignment.Center,
-                    ) {
-                        Text("size 5", fontSize = 10.sp)
-                    }
-                    Box(
-                        modifier = Modifier
-                            .size(50.dp)
-                            .background(Color.White, CircleShape)
-                            .innerShadow(
-                                shape = CircleShape,
-                                color = Color.Red,
-                                offsetX = 5.dp,
-                                offsetY = 5.dp,
-                                blur = 4.dp,
-                                spread = 4.dp,
-                            ),
-                        contentAlignment = Alignment.Center,
-                    ) {
-                        Text("circle", fontSize = 10.sp)
-                    }
-                    Box(
-                        modifier = Modifier
-                            .size(50.dp)
-                            .background(Color.White, CircleShape)
-                            .innerShadow(
-                                shape = CircleShape,
-                                color = Color.Red,
-                                offsetX = (-5).dp,
-                                offsetY = (-5).dp,
-                                blur = 4.dp,
-                                spread = 4.dp,
-                            ),
-                        contentAlignment = Alignment.Center,
-                    ) {
-                        Text("size-5", fontSize = 10.sp)
-                    }
-                }
-            }
-        }
-    }
-}
-
-@Composable
-fun SecondTitle(
-    text: String,
-    modifier: Modifier = Modifier
-) {
-    Text(text, modifier = modifier, fontSize = 24.sp, fontWeight = FontWeight.Medium)
-}
-
-@Composable
-fun AnimationColorfulCircleBox(modifier: Modifier = Modifier) {
-    val infiniteTransition = rememberInfiniteTransition()
-    val x0 = remember { Animatable(0f) }
-    val y0 = remember { Animatable(0f) }
-    val x1 = remember { Animatable(0f) }
-    val y1 = remember { Animatable(0f) }
-    val x2 = remember { Animatable(0f) }
-    val y2 = remember { Animatable(0f) }
-    LaunchedEffect(Unit) {
-        launch {
-            while (true) {
-                val d = (1000..3000).random()
-                x0.animateTo((-5..5).random().toFloat(), animationSpec = tween(d))
-                delay(d.toLong())
-            }
-        }
-        launch {
-            while (true) {
-                val d = (1000..3000).random()
-                x1.animateTo((-5..5).random().toFloat(), animationSpec = tween(d))
-                delay(d.toLong())
-            }
-        }
-        launch {
-            while (true) {
-                val d = (1000..3000).random()
-                x2.animateTo((-5..5).random().toFloat(), animationSpec = tween(d))
-                delay(d.toLong())
-            }
-        }
-        launch {
-            while (true) {
-                val d = (1000..3000).random()
-                y0.animateTo((-5..5).random().toFloat(), animationSpec = tween(d))
-                delay(d.toLong())
-            }
-        }
-        launch {
-            while (true) {
-                val d = (1000..3000).random()
-                y1.animateTo((-5..5).random().toFloat(), animationSpec = tween(d))
-                delay(d.toLong())
-            }
-        }
-        launch {
-            while (true) {
-                val d = (1000..3000).random()
-                y2.animateTo((-5..5).random().toFloat(), animationSpec = tween(d))
-                delay(d.toLong())
-            }
-        }
-    }
     Box(
-        modifier = Modifier
-            .size(50.dp)
-            .dropShadow(shape = CircleShape, color = Color(0xff5869C1), offsetX = 1.dp, offsetY = 3.dp)
-            .dropShadow(
-                shape = CircleShape,
-                color = Color(0xff11BFA5),
-                offsetX = x0.value.dp,
-                offsetY = y0.value.dp
-            )
-            .dropShadow(
-                shape = CircleShape,
-                color = Color(0xffFFF6E9),
-                offsetX = x1.value.dp,
-                offsetY = y1.value.dp
-            )
-            .dropShadow(
-                shape = CircleShape,
-                color = Color(0xffD8FFE8),
-                offsetX = x2.value.dp,
-                offsetY = y2.value.dp
-            )
-            .clip(CircleShape)
-            .background(Color.White, shape = CircleShape),
-        contentAlignment = Alignment.Center,
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.TopCenter
     ) {
-        Text("Complex", fontSize = 10.sp)
+        Column(
+            modifier = Modifier
+                .widthIn(max = 500.dp)
+                .fillMaxSize()
+                .background(Color.White)
+                .safeContentPadding()
+                .imePadding()
+                .padding(horizontal = 20.dp),
+            verticalArrangement = Arrangement.Center
+        ) {
+            var backgroundColor by remember { mutableStateOf(Color.Blue) }
+            var theCornerOfShape by remember { mutableStateOf(10f) }
+            var shadowColor by remember { mutableStateOf(Color.Black.copy(.2f)) }
+            var shadowOffset = remember { Animatable(DpOffset(0.dp, 0.dp), DpOffset.VectorConverter) }
+            var shadowBlur by remember { mutableStateOf(4f) }
+            var shadowSpread by remember { mutableStateOf(4f) }
+            var isShadowInner by remember { mutableStateOf(false) }
+            val shape = RoundedCornerShape(theCornerOfShape.dp)
+            val coroutineScope = rememberCoroutineScope()
+            var isShadowColorBottomSheetShow by remember { mutableStateOf(false) }
+            var isBackgroundColorBottomSheetShow by remember { mutableStateOf(false) }
+
+            val offsetIndicatorState = rememberOffsetIndicatorState { offset ->
+                val newOffset = DpOffset(
+                    x = offset.x.value.truncate(1).dp,
+                    y = offset.y.value.truncate(1).dp,
+                )
+                coroutineScope.launch {
+                    shadowOffset.animateTo(newOffset)
+                }
+            }
+
+            Box(
+                modifier = Modifier
+                    .padding(50.dp)
+                    .align(Alignment.CenterHorizontally)
+                    .widthIn(max = 300.dp).fillMaxWidth(.5f).aspectRatio(1f)
+                    .clickable { isBackgroundColorBottomSheetShow = true }
+                    .shadow(
+                        isShadowInner,
+                        shape = shape,
+                        color = shadowColor,
+                        offsetX = shadowOffset.value.x,
+                        offsetY = shadowOffset.value.y,
+                        blur = shadowBlur.dp,
+                        spread = shadowSpread.dp
+                    )
+                    .background(backgroundColor, shape)
+            )
+
+            Column(
+                modifier = Modifier.weight(1f).fillMaxWidth()
+                    .verticalScroll(rememberScrollState())
+            ) {
+                ConsoleItem("is inner") {
+                    Switch(checked = isShadowInner, onCheckedChange = { isShadowInner = it })
+                }
+                ConsoleItem("shape corner $theCornerOfShape") {
+                    Slider(
+                        value = theCornerOfShape,
+                        onValueChange = { coroutineScope.launch { theCornerOfShape = it.truncate(1) } },
+                        valueRange = 0f..100f,
+                    )
+                }
+
+                Row(
+                    modifier = Modifier.padding(vertical = 20.dp),
+                    horizontalArrangement = Arrangement.spacedBy(10.dp),
+                ) {
+                    Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                        OffsetItemTextField(
+                            value = offsetIndicatorState.targetValue.x.value.truncate(1).toString(),
+                            onValueChange = {
+                                coroutineScope.launch {
+                                    offsetIndicatorState.animateTo(
+                                        shadowOffset.value.copy(x = it.dp),
+                                    )
+                                }
+                            },
+                            label = "offset x",
+                            modifier = Modifier.width(100.dp)
+                        )
+                        OffsetItemTextField(
+                            value = offsetIndicatorState.targetValue.y.value.truncate(1).toString(),
+                            onValueChange = {
+                                coroutineScope.launch {
+                                    offsetIndicatorState.animateTo(
+                                        shadowOffset.value.copy(y = it.dp),
+                                    )
+                                }
+                            },
+                            label = "offset y",
+                            modifier = Modifier.width(100.dp)
+                        )
+                    }
+
+                    OffsetIndicator(
+                        state = offsetIndicatorState,
+                        modifier = Modifier.size(120.dp)
+                    )
+
+                    ConsoleItem("shadow color") {
+                        Box(
+                            modifier = Modifier.size(50.dp)
+                                .background(shadowColor)
+                                .clickable { isShadowColorBottomSheetShow = true }
+                        )
+                    }
+                }
+
+                ConsoleItem("blur $shadowBlur") {
+                    Slider(
+                        value = shadowBlur,
+                        onValueChange = { coroutineScope.launch { shadowBlur = it.truncate(1) } },
+                        valueRange = 0f..100f,
+                    )
+                }
+
+                ConsoleItem("spread $shadowSpread") {
+                    Slider(
+                        value = shadowSpread,
+                        onValueChange = { coroutineScope.launch { shadowSpread = it.truncate(1) } },
+                        valueRange = 0f..100f,
+                    )
+                }
+                if (isShadowColorBottomSheetShow) {
+                    ModalBottomSheet(onDismissRequest = { isShadowColorBottomSheetShow = false }) {
+                        val controller = rememberColorPickerController()
+                        Column(modifier = Modifier.padding(horizontal = 20.dp)) {
+                            HsvColorPicker(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(300.dp)
+                                    .padding(10.dp),
+                                drawDefaultWheelIndicator = true,
+                                initialColor = shadowColor,
+                                controller = controller,
+                                onColorChanged = {
+                                    shadowColor = it.color
+                                }
+                            )
+                            AlphaSlider(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(10.dp)
+                                    .height(35.dp),
+                                controller = controller,
+                            )
+                            BrightnessSlider(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(10.dp)
+                                    .height(35.dp),
+                                controller = controller,
+                            )
+                        }
+                    }
+                }
+                if (isBackgroundColorBottomSheetShow) {
+                    ModalBottomSheet(onDismissRequest = { isBackgroundColorBottomSheetShow = false }) {
+                        val controller = rememberColorPickerController()
+                        Column(modifier = Modifier.padding(horizontal = 20.dp)) {
+                            HsvColorPicker(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(300.dp)
+                                    .padding(10.dp),
+                                drawDefaultWheelIndicator = true,
+                                initialColor = shadowColor,
+                                controller = controller,
+                                onColorChanged = {
+                                    backgroundColor = it.color
+                                }
+                            )
+                            AlphaSlider(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(10.dp)
+                                    .height(35.dp),
+                                controller = controller,
+                            )
+                            BrightnessSlider(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(10.dp)
+                                    .height(35.dp),
+                                controller = controller,
+                            )
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
-@Preview
 @Composable
-private fun SampleAppPreview() {
-    Box(modifier = Modifier.padding(40.dp)) {
-        SampleApp()
+private fun ConsoleItem(
+    title: String,
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit,
+) {
+    Column(modifier) {
+        Text(title)
+        content()
     }
+}
+
+private fun Modifier.shadow(
+    isInner: Boolean,
+    shape: Shape,
+    color: Color,
+    offsetX: Dp,
+    offsetY: Dp,
+    blur: Dp,
+    spread: Dp,
+): Modifier {
+    return if (isInner) {
+        this.innerShadow(
+            shape = shape,
+            color = color,
+            offsetX = offsetX,
+            offsetY = offsetY,
+            blur = blur,
+            spread = spread
+        )
+    } else {
+        this.dropShadow(
+            shape = shape,
+            color = color,
+            offsetX = offsetX,
+            offsetY = offsetY,
+            blur = blur,
+            spread = spread
+        )
+    }
+}
+
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun OffsetItemTextField(
+    value: String,
+    onValueChange: (Float) -> Unit,
+    label: String,
+    modifier: Modifier = Modifier,
+) {
+    var innerValue by remember(value) { mutableStateOf(value) }
+    val keyboardController = LocalSoftwareKeyboardController.current
+    BasicTextField(
+        modifier = modifier,
+        value = innerValue,
+        onValueChange = {
+            innerValue = it
+            try {
+                val float = innerValue.toFloat()
+                onValueChange(float)
+            } catch (_: NumberFormatException) {}
+        },
+        keyboardOptions = KeyboardOptions(
+            imeAction = ImeAction.Done,
+        ),
+        keyboardActions = KeyboardActions(
+            onDone = {
+                keyboardController?.hide()
+            }
+        ),
+        enabled = true,
+        singleLine = true,
+    ) {
+        val mis = remember { MutableInteractionSource() }
+        OutlinedTextFieldDefaults.DecorationBox(
+            value = value,
+            innerTextField = it,
+            singleLine = true,
+            enabled = true,
+            label = { Text(label) },
+            visualTransformation = VisualTransformation.None,
+            interactionSource = mis,
+            colors = OutlinedTextFieldDefaults.colors(),
+            contentPadding = PaddingValues(vertical = 2.dp, horizontal = 10.dp),
+            container = {
+                OutlinedTextFieldDefaults.Container(
+                    enabled = true,
+                    isError = false,
+                    interactionSource = mis,
+                    focusedBorderThickness = 1.dp,
+                    unfocusedBorderThickness = 1.dp,
+                )
+            }
+        )
+    }
+}
+
+fun Float.truncate(decimalNumber: Int): Float {
+    require(decimalNumber >= 0) { "Decimal number must be non-negative." }
+    val multiplier = 10f.pow(decimalNumber)
+    return (this * multiplier).toInt() / multiplier
 }
