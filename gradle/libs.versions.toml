@@ -13,7 +13,7 @@ androidxAnnotation = "1.9.1"
 kotlin = "2.1.0"
 binaryCompatibilityValidator = "0.16.3"
 #compose
-composeMultiplatform = "1.7.1"
+composeMultiplatform = "1.7.3"
 #other
 dokka = "1.9.20"
 mavenPublish = "0.30.0"
