@@ -5,28 +5,28 @@ androidMinSdk = "21"
 androidTargetSdk = "35"
 androidGradlePlugin = "8.6.1"
 #androidx
-androidxActivity = "1.10.0"
+androidxActivity = "1.10.1"
 androidxAppCompat = "1.7.0"
-androidxMacroBenchmark = "1.3.3"
+androidxMacroBenchmark = "1.3.4"
 androidxAnnotation = "1.9.1"
 #kotlin
-kotlin = "2.1.10"
-kotlinx-coroutine = "1.10.1"
+kotlin = "2.1.21"
+kotlinx-coroutines = "1.10.2"
 binaryCompatibilityValidator = "0.17.0"
 #compose
-composeMultiplatform = "1.7.3"
+composeMultiplatform = "1.8.1"
 colorpicker="1.1.2"
 #other
 dokka = "2.0.0"
-mavenPublish = "0.30.0"
+mavenPublish = "0.31.0"
 [libraries]
 #androidx
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "androidxAppCompat" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidxActivity" }
 androidx-annotation = { module = "androidx.annotation:annotation", version.ref = "androidxAnnotation" }
 # kotlin
-kotlinx-coroutine-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutine" }
-kotlinx-coroutine-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinx-coroutine" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
 colorPicker = { module = "com.github.skydoves:colorpicker-compose", version.ref = "colorpicker" }
 [plugins]
 #android
