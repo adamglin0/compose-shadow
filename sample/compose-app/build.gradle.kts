@@ -33,7 +33,7 @@ kotlin {
     }
 
     js(IR) {
-        moduleName = "sharedApp"
+        outputModuleName = "sharedApp"
         browser {
             commonWebpackConfig {
                 outputFileName = "sharedApp.js"
@@ -44,7 +44,7 @@ kotlin {
 
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
-        moduleName = "sharedApp"
+        outputModuleName = "sharedApp"
         browser {
             commonWebpackConfig {
                 outputFileName = "sharedApp.js"
@@ -68,7 +68,7 @@ kotlin {
 
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
-            implementation(libs.kotlinx.coroutine.swing)
+            implementation(libs.kotlinx.coroutines.swing)
         }
     }
 }
