@@ -5,20 +5,20 @@ androidMinSdk = "21"
 androidTargetSdk = "35"
 androidGradlePlugin = "8.6.1"
 #androidx
-androidxActivity = "1.10.0"
+androidxActivity = "1.10.1"
 androidxAppCompat = "1.7.0"
-androidxMacroBenchmark = "1.3.3"
+androidxMacroBenchmark = "1.3.4"
 androidxAnnotation = "1.9.1"
 #kotlin
-kotlin = "2.1.10"
-kotlinx-coroutine = "1.10.1"
+kotlin = "2.1.21"
+kotlinx-coroutine = "1.10.2"
 binaryCompatibilityValidator = "0.17.0"
 #compose
-composeMultiplatform = "1.7.3"
+composeMultiplatform = "1.8.1"
 colorpicker="1.1.2"
 #other
 dokka = "2.0.0"
-mavenPublish = "0.30.0"
+mavenPublish = "0.31.0"
 [libraries]
 #androidx
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "androidxAppCompat" }
