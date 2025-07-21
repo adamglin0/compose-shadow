@@ -1,4 +1,7 @@
-# Compose Shadow
+# Compose Shadow [deprecation]
+
+> Compose Multiplatform 1.9 started supporting shadows, so this library is deprecated.
+
 
 A Kotlin Multiplatform implementation of drop/inner shadows for Compose Multiplatform.
 
